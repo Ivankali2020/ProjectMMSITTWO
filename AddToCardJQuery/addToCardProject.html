@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jquery addToCardProject</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="fontawesome-free-5.15.3-web/css/all.min.css">
+    <style>
+         ::-webkit-scrollbar {
+        width: 0.1em;
+        }
+        
+        ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        outline: 1px solid slategrey;
+        }
+        .mainBod{
+            padding: 0px !important;
+
+        }
+        .C_card{
+            border: none;
+            /* width: 300px; */
+            min-height: 200px;
+            margin-top: 30% !important;
+            transition: .3s all ease;
+        }
+        .C_card img{
+            height: 100px;
+            width: auto;
+            margin-top: -18%;
+            margin-left: 20px;
+            transition: .5s all ease;
+        }
+        .C_card:hover {
+
+            box-shadow:2px 7px 13px -6px rgba(0,0,0,0.75) !important;
+        }
+        .C_card:hover img{
+            transform: scale(1.05) rotate(10deg);
+        }
+        .description{
+            font-size: 15px !important;
+
+        }
+        .buy-img{
+            height: 50px;
+        }
+        .buy-input{
+            height: 33px!important;
+            width: 80px !important;
+        }
+        .buyTotal{
+            position: sticky;
+            bottom: 0;
+            padding: 20px ;
+            background-color: transparent;
+            backdrop-filter: blur(20px);
+            border: 1px transparent;
+            border-top-right-radius: 20px;
+            border-top-left-radius: 20px;
+            }
+        .mainCart{
+            overflow: scroll;
+            height: 90vh;
+        }
+        .littleCard{
+            overflow: scroll;
+            height: 100vh;
+        }
+        .store{
+            position: sticky;
+            top: 0px;
+            background-color: transparent;
+            backdrop-filter: blur(5px);
+            padding: 10px 40px;
+            border-radius: 20px;
+            z-index: 20;
+        }
+        .card-box{
+            position: relative;
+        }
+        .loader{
+            width: 100%;
+            height: 100vh;
+            background-color: rgb(255, 255, 255);
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-12 mainBox m-auto  ">
+               <div class="row  ">
+                   <div class="col-12 col-md-9 border-right vh-100 mainCart ">
+                        <div class="store ">
+                            <div class="logo d-flex justify-content-between align-items-center">
+                                <div class="">
+                                    <h4 class="text-primary">jQuery Fade Store Project</h1>
+                                    <span class="text-black-50">bootstrap and jQuery </h1>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="form-row form-group mr-3 mb-0" >
+                                        <input type="text" id="search" placeholder="Search Itmes" class="form-control bg-transparent">
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <select name="" id="select" class="custom-select text-black-50" >
+                                            <option value="0" class="text-black-50 bg-transparent">All Cartegory</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-box card-columns  ">
+                            <div class="loader">
+                                <img src="assets/loading.svg" alt="" srcset="">
+                            </div>
+                            <!-- <div class="card C_card">
+                                <img src="" alt="" class="card-img-top">
+                                <div class="card-body">
+                                    <div class="card-title text-primary">helllo</div>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo sapiente suscipit natus labore illo minima, at minus ullam soluta nulla quod esse doloremque! Deserunt, inventore? Impedit saepe molestiae consequatur inventore.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>$ <span>2220</span></span>
+                                        <button class="btn btn-outline-primary">Add <i class="fa fa-car-alt"></i></button>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                   </div>
+                   <div class="col-12 col-md-3 px-2 littleCard">
+                        <div class="">
+                            <div class=" pt-3">
+                                <div class="logo d-flex justify-content-between align-items-center">
+                                    <div class="">
+                                        <h4 class="text-primary">Add Cart</h1>
+                                        <span class="text-black-50">Selected Items </h1>
+                                    </div>
+                                    <div class="d-flex align-items-center align-self-end">
+                                        <i class="fa fa-cart-plus h2"></i>    <span class="toShowCardItem text-white fw-bolder fs-4 align-self-start mr-3 badge-pill badge-success">0 </span>
+                                    </div>
+                                </div>
+                                <div class="buyBox  ">
+                                    <!-- <div class="card">
+                                        <div class="card-body">
+                                            <div class="buy-item d-flex justify-content-between">
+                                                <img src="" class="buy-img" alt="" srcset="">
+                                                <i class="fa fa-trash-alt text-danger"></i>
+                                            </div>
+                                            <div class="">
+                                                <p class="buy-title">TITLE</p>
+                                            </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex align-items-center form-group ">
+                                                    <button class="btn btn-sm btn-outline-primary buy-minus"><i class="fa fa-minus"></i></button>
+                                                    <input type="number" class="buy-input w-25 form-control input-sm" value="1" min="1" >
+                                                    <button class="btn btn-sm btn-outline-primary buy-minus"><i class="fa fa-plus"></i></button>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                        <h5 class=""> $<h6 id="buy-dollar " class="ml-1 fw-bolder d-inline">123</h6></h5>
+        
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                                <div class="buyTotal  d-flex justify-content-between align-items-center mx-2 mt-4">
+                                    <h6>Total</h6>
+                                    <div class="">
+                                    <span>$ <span id="total-buy">123</span></span>
+        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+               
+            </div>
+        </div>
+    </div>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script>
+
+
+        let products = []; //get outside array for other funtion
+         let increase = 1;
+
+       
+        $(window).on('load',function(){
+            $('.loader').fadeOut(1500)
+        })
+
+        $.get('https://fakestoreapi.com/products',function(data){
+
+            products = data;
+            toShow(data);
+
+        });
+        // letter for short 
+        function toShort(text,max){
+                if(text.length > 100){
+
+                   let newText =  text.substring(0,max) + "....";
+                    
+                   return newText;
+                }else{
+                    return text.substring(0,max) + "....";
+                }
+                
+        };
+
+        // card toshow 
+        function toShow(x){
+            $('.card-box').empty();
+            x.map(product => {
+                    $('.card-box').append(
+                        `
+                                    <div class="card C_card shadow-sm">
+                                        <img src="${product.image}" alt="" class="card-img-top">
+                                        <div class="card-body ">
+                                            <div class="card-title text-primary fw-bolder text-nowrap overflow-hidden">${product.title}</div>
+                                            <p class="text-black-50 description">${toShort(product.description,100)}</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="text-dark-50 fs-5">$ <span>${product.price}</span></span>
+                                                <button class="btn btn-outline-primary" id="addToCart" data='${product.id}'>Add <i class="fa fa-car-alt"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                    `)
+           })
+        };
+
+
+        //input keyup mean when u type something it's can show you
+        $('#search').on('keyup',function(){
+
+            let keyword = $(this).val().toLowerCase();
+            // jQuery can make filter but it's not perfetch
+
+        //    let filter = $('.C_card ').filter(function (){
+        //         $(this).toggle($(this).text().toLocaleLowerCase().indexOf(keyword) > -1 )
+        //       })
+
+            console.log(keyword.length)
+
+            if(keyword.trim().length != 0){
+                
+                let result = products.filter(el => {
+                    if(el.title.toLowerCase().indexOf(keyword) > -1 || el.description.toLowerCase().indexOf(keyword) > -1 ){
+                        return el;
+                    }
+
+                })
+            toShow(result);
+
+            }
+        });
+        //to get category in select//
+        $.get('https://fakestoreapi.com/products/categories',function(data){
+
+            data.map(el => {
+                $('#select').append(`
+               
+                <option value="${el}">${el}</option>
+
+                `);               
+            });
+
+            $('#select').on('change',function(){
+                let value = $(this).val();
+
+                if(value != 0){
+
+                    let array = products.filter(el => {
+                        if(el.category == value){
+                            return el;
+                        }else{
+                            return ;
+                        }
+                    });
+                    toShow(array)
+                }else{
+                    toShow(products);
+                }
+            })
+        });
+
+        //total final 
+        function total(x){
+            
+            let cartNoti = $('.buyCart').toArray().length;
+            console.log(cartNoti)
+            if(cartNoti >= 1){
+
+                let dollarTotal = $(' #buy-dollar').toArray().map(el => el.innerHTML).reduce((x,y)=> Number(x) + Number(y));
+                let fixedCost = Number(dollarTotal).toFixed(2);
+                $('#total-buy').html(fixedCost);//total cost 
+                $('.toShowCardItem').html(cartNoti);//noti length 123
+
+
+            }else{
+                $('#total-buy').html(0);
+                $('.toShowCardItem').html(0 );//noti length 123
+
+            }
+        }
+        ///add Cart side bar
+
+        function addCart(x){
+            x.map(el => {
+                    $('.buyBox').append(`
+                    <div class="card buyCart my-3" id='${el.id}' class="my-3">
+                                    <div class="card-body">
+                                        <div class="buy-item d-flex justify-content-between align-items-center">
+                                            <img src="${el.image}" class="buy-img" alt="" srcset="">
+                                            <i class="fa fa-trash-alt text-danger" id="delCart"></i>
+                                        </div>
+                                        <div class="">
+                                            <p class="buy-title">${toShort(el.title,50)}</p>
+                                        </div>
+                                    <div class="d-flex justify-content-between align-items-center ">
+                                            <div class="d-flex align-items-center form-group mb-0">
+                                                <button class="btn btn-sm btn-outline-primary buy-minus"><i class="fa fa-minus"></i></button>
+                                                <input type="number" class="buy-input w-25 form-control input-sm" value="1" min="1" >
+                                                <button class="btn btn-sm btn-outline-primary buy-plus"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                    <h5 class="mb-0"> $<h6 id="buy-dollar" dollar='${el.price}' class="mb-0 ml-1 fw-bolder d-inline">${el.price}</h6></h5>
+
+                                            </div>
+                                    </div>
+                                    </div>
+                                </div>
+                    `);
+                })
+            
+        }
+       //click addCart 
+
+       $('.card-box').delegate('#addToCart','click',function(){
+            let self = $(this).attr('data');
+            let filterCard = products.filter(el => {
+                return el.id == self;
+            });
+            let ar = $('.buyCart').toArray().map(el => el.id)
+            if(ar.includes(self)){
+
+                alert('Already Added');
+                return;
+
+            }else{
+
+                 addCart(filterCard);
+
+            }
+
+                
+
+
+           total(self);
+
+       });
+
+        // delete order cart 
+
+       $('.buyBox').delegate('#delCart','click',function(){
+           $(this).parentsUntil('.buyBox').remove();
+           total();
+       });
+
+       //order plus increase btn
+       $('.buyBox').delegate('.buy-plus','click',function(){
+            let value = $(this).siblings()[1].value;                                            //get value from input
+            let OnePrice =  $(this).parent().siblings().find('#buy-dollar').attr('dollar');                                            //get value from input
+            let inc = Number(value) + 1;                                                      //increase value
+            $(this).siblings()[1].value = `${inc}`;                                          //and reinput again beacause next time for ++;
+            const firstPrice = $(this).parent().siblings().find('#buy-dollar').text();                                          
+            // let OnePrice = Number(firstPrice) / inc ;
+
+           $(this).parent().siblings().find('#buy-dollar').text(Number(OnePrice * inc).toFixed(2));                   //cost add and go total to refresh
+           total();
+           console.log(firstPrice)
+       });
+
+       //order minus decrease btn event
+       $('.buyBox').delegate('.buy-minus','click',function(){
+           let value = $(this).siblings()[0].value;
+
+          
+          if(value == 1){
+
+            alert('Fuck The Coup')
+            
+          }else{
+            let OnePrice =  $(this).parent().siblings().find('#buy-dollar').attr('dollar');                                            //get value from input
+            let inc = Number(value) - 1;                                                      //ec value
+            $(this).siblings()[0].value = `${inc}`;                                          //and reinput again beacause next time for ++;
+            const firstPrice = $(this).parent().siblings().find('#buy-dollar').text();                                          
+           $(this).parent().siblings().find('#buy-dollar').text(Number(OnePrice * inc).toFixed(2));                   //cost add and go total to refresh
+           total();
+           console.log(OnePrice)
+          }
+       });
+
+       $('.buyBox').delegate('.buy-input','change keyup',function(){
+           let input = $(this).val();
+           const pclick = $(this).siblings()[1];                                      
+          
+          if(input > 1){
+            let OnePrice =  $(this).parent().siblings().find('#buy-dollar').attr('dollar');                                            //get value from input
+           const firstPrice = $(this).parent().siblings().find('#buy-dollar').text();                                          
+                                
+                               $(this).parent().siblings().find('#buy-dollar').text(Number(OnePrice * input).toFixed(2));                   //cost add and go total to refresh
+                               total();
+          }else{
+              input = 1 ;
+              pclick.click();         
+            }
+
+       })
+
+
+
+</script>
+
+</body>
+</html>

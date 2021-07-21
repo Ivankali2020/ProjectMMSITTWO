@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap-5.0.1-dist/css/bootstrap.min.css">
+    <style>
+        table{
+            margin-top: 40px;
+            width: 400px;
+            border-collapse: collapse;
+            
+        }
+        th,tr,td{
+            border: 1px solid black;
+            text-align: center;
+            height: 30px;
+        }
+        .newFruit{
+            
+        }
+        input{
+            width: 150px;
+            height: 30px;
+            padding: 0px 20px;
+        }
+        .hello{
+            background-color: gold;
+        }
+        .bag-health{
+            width:400px;
+            border: 2px solid black;
+
+        }
+        .bag-health div{
+            height: 20px;
+            width: 100%;
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+
+   <div class="container">
+       <div class="row justify-content-center m-auto">
+           <div class="col-12 pt-5">
+            <div id="vue" class="m-auto">
+                
+                <h1 class="text-center">{{ title }}</h1>
+                <div class="newFruit mb-5 text-center">
+                    <input type="text" v-model="newFruitName" placeholder="Fruit Name">
+                    <input type="number" v-model.number ="newFruitPrice" @keyup.keycode.13='add' placeholder="Fruit Price">
+                    <button class="btn btn-primary" @click="add">Add Fruit</button>
+                </div>
+                <table class="m-auto">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Fruit Name</th>
+                            <th>Fruit Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="x in fruitArr">
+                            <th>{{x.id}}</th>
+                            <th>{{x.name}}</th>
+                            <th>{{x.price}}</th>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">Total</td>
+                            <td>{{ totalPrice }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            
+                <!-- <div class=" mt-5  d-flex justify-content-center">
+                    <div class="">
+                        <div class="bag-health">    
+                            <div :style="{width:health + '%'}"></div>
+                        </div>
+                        <button @click="a">Punch</button>
+                    </div>
+                   
+                </div>
+                <div class="mt-4 d-flex justify-content-center">
+                    <input ref="input" type="text" />
+                    <button @click='refs'>Click</button>
+                    <p> {{ name }} </p>
+                </div> -->
+               
+           </div>
+       </div>
+   </div>
+
+  
+    <script src="vue@2.js"></script>
+    <script>
+        
+        let app = new Vue({
+            el : '#vue',
+            
+            // vue instance
+            data : {
+                name: '',
+                title : "Today Fruit Table",
+                newFruitName : "",  
+                newFruitPrice : "",
+                fruitArr : [
+                    {id:1,name:"Apple",price:200},
+                    {id:2,name:"Orange",price:100},
+                    {id:3,name:"Mango",price:520},
+                    {id:4,name:"Banana",price:20},
+                    {id:5,name:"JackFruit",price:300},
+                ],
+                health:100,
+            },
+
+            //computed
+
+            computed : {
+             
+
+                totalPrice() {
+                    let price = this.fruitArr.map(el => el.price);
+                    return price.reduce((x,y) => x + y)
+                },
+                    },
+
+            //method
+            methods: {
+                a(){
+                    this.health -= 10;
+                    if(this.health <= 0){
+                        this.health = 100
+                    }
+                    console.log(this.health)
+                },
+                add(){
+                    this.fruitArr.push(
+                        {
+                            id:this.fruitArr.length+1,
+                            name:this.newFruitName,
+                            price:this.newFruitPrice
+                        }
+                    );
+                    this.newFruitPrice = "";
+                    this.newFruitName = "";
+                },
+                refs(){
+                    console.log(this.$refs.input.value)
+                    this.name = this.$refs.input.value
+                    this.$refs.input.value = ''
+                    
+                }
+            },
+        })
+    </script>
+</body>
+</html>
